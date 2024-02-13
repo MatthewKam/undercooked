@@ -14,10 +14,10 @@ export default function Header() {
 				<a href="/recipes/categories" className="px-2">
 					<h2>Recipe Categories</h2>
 				</a>
-				<a href="/user/account" className="px-2">
+				<a href="/account" className="px-2">
 					<h2>Account</h2>
 				</a>
-				<a href="/auth/login" className="px-2">
+				<a href="/login" className="px-2">
 					<h2>Login</h2>
 				</a>
 			</div>

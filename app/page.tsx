@@ -1,7 +1,8 @@
 "use client";
 import { CardWithForm } from "@/components/CardWithForm";
 
-export default function Home() {
+export default async function Home() {
+	
 	return (
 		<main className="flex h-full flex-col items-center justify-center">
 			<div className="space-y-6 text-center">

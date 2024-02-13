@@ -33,7 +33,7 @@ export function LoginForm() {
 		<CardWrapper
 			headerLabel="Welcome back"
 			backButtonLabel="Don't have an account?"
-			backButtonHref="/auth/register"
+			backButtonHref="/register"
 			showSocial>
 			<Form {...form}>
 				<form onSubmit={() => {}} className="space-y-6">

@@ -1,7 +1,7 @@
 import { NextAuthOptions } from 'next-auth';
 import GoogleProvider from "next-auth/providers/google";
 import { database as db } from '@/lib/database';
-import { ref } from "firebase/database";
+import { get, ref } from "firebase/database";
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
@@ -18,11 +18,6 @@ export const authOptions: NextAuthOptions = {
       const { provider } = account || {};
       const { given_name: first_name, family_name: last_name } = profile;
 
-
-      // query firebase to see if user object already exists
-
-      
-
       // if it exsits, make the user object
 
       const payload = {
@@ -31,6 +26,7 @@ export const authOptions: NextAuthOptions = {
         last_name,
         provider,
         image,
+        email, 
       }
 
       console.log({payload})

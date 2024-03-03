@@ -1,7 +1,9 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 export default function Header() {
+	// const { data: session } = useSession();
+
 	return (
 		<header className="flex justify-between p-6">
 			<a href="/">

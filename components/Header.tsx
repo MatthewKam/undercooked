@@ -1,8 +1,18 @@
 "use client";
-import { signIn, useSession } from "next-auth/react";
+import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
 
-export default function Header() {
-	// const { data: session } = useSession();
+export const HeaderSessionProvider = () => {
+	return (
+		<SessionProvider>
+			<Header />
+		</SessionProvider>
+	)
+}
+
+function Header() {
+	const { data: session } = useSession();
+
+	console.log('session from header ->', session)
 
 	return (
 		<header className="flex justify-between p-6">
@@ -16,13 +26,23 @@ export default function Header() {
 				<a href="/recipes/categories" className="px-2">
 					<h2>Recipe Categories</h2>
 				</a>
-				<a href="/account" className="px-2">
-					<h2>Account</h2>
-				</a>
-				<a href="/login" className="px-2">
-					<h2>Login</h2>
-				</a>
+				{session ? (
+					<button className="px-2" onClick={() => signOut()}>
+						<h2>Logout</h2>
+					</button>
+				) : (
+					<>
+						<a href="/account" className="px-2">
+							<h2>Account</h2>
+						</a>
+						<a href="/login" className="px-2">
+							<h2>Login</h2>
+						</a>
+					</>
+				)}
 			</div>
 		</header>
 	);
 }
+
+export default HeaderSessionProvider

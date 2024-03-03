@@ -12,14 +12,8 @@ interface Props {
 	children?: React.ReactElement;
 	cardTitle: string;
 	cardDescription: string;
-	onSubmit: (values: any) => void;
 }
-export function CardWithForm({
-	children,
-	cardTitle,
-	cardDescription,
-	onSubmit,
-}: Props) {
+export function CardWithForm({ children, cardTitle, cardDescription }: Props) {
 	return (
 		<Card className="w-[350px]">
 			<CardHeader>

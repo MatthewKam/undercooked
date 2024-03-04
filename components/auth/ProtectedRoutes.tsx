@@ -1,24 +1,19 @@
-'use client';
-
 import React, { FC, ReactNode } from 'react'
-import { useSession } from "next-auth/react";
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 interface ProtectedRoutesProps {
     children: ReactNode;
 }
 
-const ProtectedRoutes: FC<ProtectedRoutesProps> = ({children}) => {
-    const router = useRouter()
-	const { data: session } = useSession();
+const ProtectedRoutes: FC<ProtectedRoutesProps> = async ({children}) => {
+	const session = await getServerSession(authOptions);
+
 	console.log('ProtectedRoutes', session)
-	if(session === undefined) {
-		return <h1>loading...</h1>
-	}
 
 	if(session === null) {
-        router.push('/')
-        return null;
+        redirect('/login')
     }
 
   return (

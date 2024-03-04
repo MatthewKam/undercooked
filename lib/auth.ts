@@ -10,12 +10,12 @@ export const authOptions: NextAuthOptions = {
 			clientSecret: process.env.AUTHENTICATION_GOOGLE_CLIENT_SECRET as string,
 		}),
 	],
-	// session: {
-	// 	strategy: 'jwt',
-	// },
+	session: {
+		strategy: 'jwt',
+	},
 	callbacks: {
 		async signIn({ user, account, profile, email, credentials }) {
-			return true
+
 			const { id: user_id, name: fullName, image } = user;
 			const { provider } = account || {};
 			const { given_name: first_name, family_name: last_name } = profile as any; // @TODO fix this typescript type
@@ -67,31 +67,26 @@ export const authOptions: NextAuthOptions = {
 		},
 		async jwt({ token, user, session }) {
 			// the processing of JWT occurs before handling sessions. 
-			console.log("jwt callback ", { token, user, session });
-	  
-			if (user) {
-			  token.id = user.id;
-			}
-	  
 			return token;
 		  },
 	  
-		  //  The session receives the token from JWT
-		  async session({ session, token, user }) {
+		 //  The session receives the token from JWT
+		async session({ session, token, user }) {
 			console.log("session callback ", { token, user, session });
-	  
+			const userSession = {
+				...session,
+				userId: token?.sub,
+			}
+		
 			return {
-			  ...session,
-			  user: {
+				...userSession,
+				user: {
 				...session.user,
-				accessToken: token.accessToken as string,
-				refreshToken: token.refreshToken as string,
-				role: token.role,
-				id: token.id,
-			  },
-			  error: token.error,
+				...token,
+				},
+				error: token.error, // i dont think this exists (yet)
 			};
-		  },
+		},
 	},
 };
 

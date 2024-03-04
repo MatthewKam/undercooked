@@ -1,16 +1,11 @@
-"use client";
-import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
+import { UserSession } from "@/app/account/page";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import HeaderSignIn from "./HeaderSignIn";
 
-export const HeaderSessionProvider = () => {
-	return (
-		<SessionProvider>
-			<Header />
-		</SessionProvider>
-	)
-}
+export default async function Header() {
 
-function Header() {
-	const { data: session } = useSession();
+	const session: UserSession | null = await getServerSession(authOptions);
 
 	console.log('session from header ->', session)
 
@@ -26,23 +21,10 @@ function Header() {
 				<a href="/recipes/categories" className="px-2">
 					<h2>Recipe Categories</h2>
 				</a>
-				{session ? (
-					<button className="px-2" onClick={() => signOut()}>
-						<h2>Logout</h2>
-					</button>
-				) : (
-					<>
-						<a href="/account" className="px-2">
-							<h2>Account</h2>
-						</a>
-						<a href="/login" className="px-2">
-							<h2>Login</h2>
-						</a>
-					</>
-				)}
+				<HeaderSignIn session={session} />
 			</div>
 		</header>
 	);
 }
 
-export default HeaderSessionProvider
+// export default HeaderSessionProvider

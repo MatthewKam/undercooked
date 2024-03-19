@@ -13,7 +13,7 @@ export default async function Header() {
 				<h1 className="text-2xl">Undercooked</h1>
 			</a>
 			<div className="flex">
-				<a href="/recipes/" className="px-2">
+				<a href="/recipes" className="px-2">
 					<h2>Recipes</h2>
 				</a>
 				<a href="/recipes/categories" className="px-2">

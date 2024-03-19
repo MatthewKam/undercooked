@@ -25,7 +25,8 @@ export default async function Account() {
 	const session: UserSession | null = await getServerSession(authOptions);
 
 	if(!session) redirect('/login')
-	const { userId } = session ;
+
+	const { userId } = session;
 	const { name, email, image, picture } = session.user;
 
 	console.log({session})

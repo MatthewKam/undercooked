@@ -7,8 +7,6 @@ export default async function Header() {
 
 	const session: UserSession | null = await getServerSession(authOptions);
 
-	console.log('session from header ->', session)
-
 	return (
 		<header className="flex justify-between p-6">
 			<a href="/">

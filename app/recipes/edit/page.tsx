@@ -1,5 +1,4 @@
 import { UserSession } from '@/app/account/page';
-import Heading from '@/components/ui/Heading';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
@@ -14,8 +13,6 @@ export default async function Page() {
 
 
 	return (
-        <Heading as="h1">
-            Create a recipe
-        </Heading>
+        <h1>{userId}</h1>
     );
 }
